@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>wiki</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .chartMenu {
+            width: 100vw;
+            height: 40px;
+            background: #1A1A1A;
+            color: rgb(101, 236, 101);
+        }
+
+        .chartMenu p {
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        .chartCard {
+            width: 100vw;
+            height: calc(100vh - 40px);
+            background: rgba(125, 200, 14, 0.42);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chartBox {
+            width: 700px;
+            padding: 20px;
+            border-radius: 20px;
+            border: solid 3px rgb(40, 92, 5);
+            background: white;
+        }
+
+        section {
+            width: 100vw;
+            height: 6vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        input {
+            width: 50vw;
+            padding: 10px;
+            outline: none;
+            border: 5px solid #CCD1E4;
+            font-weight: 600;
+        }
+
+        table {
+            border: rgb(69, 194, 69) 5px solid;
+            margin: 0 auto;
+        }
+
+        td {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        color: rgb(0, 15, 2);
+        }
+
+
+
+    </style>
+
+    <nav class="sticky-top navbar navbar-light bg-info ">
+
+        <ul class="navbar-nav">
+            <a class="navbar-brand text-light" href="#"> </a>
+            <section id="contenedor-main">
+                </a><a class="nav-link" href="#"> Palabras - Wikipedia </a> </li>
+                <input type="text" name="buscador" id="buscador" placeholder="Buscar...">
+            </section>
+            <li class="nav-item active"><a class="navbar-brand text-light" href="#">
+        </ul>
+    </nav>
+</head>
+
+<body>
+    <div class="chartCard">
+        <div class="chartBox">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // setup 
+        
+        const data = {
+            labels: ["<%= resultado[0].name %>", "<%= resultado[1].name %>", "<%= resultado[2].name %>", "<%= resultado[3].name %>", "<%= resultado[4].name %>", "<%= resultado[5].name %>", "<%= resultado[6].name %>",
+                    "<%= resultado[6].name %>", "<%= resultado[6].name %>", "<%= resultado[7].name %>", "<%= resultado[8].name %>", "<%= resultado[9].name %>"],                                
+            datasets: [{
+                label: 'Palabras más usadas de Wikipedia',
+                data:["<%= resultado[0].amount%>", "<%= resultado[1].amount %>", "<%= resultado[2].amount%>", "<%= resultado[3].amount %>", "<%= resultado[4].amount%>", "<%= resultado[5].amount %>",
+                        "<%= resultado[6].amount%>", "<%= resultado[7].amount %>", "<%= resultado[8].amount%>", "<%= resultado[9].amount %>"],
+
+                backgroundColor: [
+                    'rgba(255, 26, 104, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(0, 0, 0, 0.2)'
+
+                ],
+                borderColor: [
+                    'rgba(255, 26, 104, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(0, 0, 0, 1)'
+                ],
+                borderWidth: 2
+            }]
+        };
+
+        // config 
+        const config = {
+            type: 'pie',
+            data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // render init block
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+
+
+    <div>
+        <TABLE BORDER>
+
+            <TR>
+                <TD> Palabra</TD>
+                <TD> Cantidad</TD> 
+            </TR>
+            <TR><% resultadototal.forEach(function (palabra) { %>
+                <TD><%= palabra.name,%></TD>
+                <TD><%= palabra.amount%></TD>    
+            </TR>
+                <% }) %>
+            </TABLE>
+
+
+    </div>
+
+
+</body>
+</body>
+
+</html>
